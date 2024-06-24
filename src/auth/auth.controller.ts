@@ -30,7 +30,7 @@ export class AuthController {
   }
 
   @Get("profile")
-  @Auth(Role.USER)
+  @Auth(Role.ADMIN)
   async profile(@ActivateUser() user: UserActivateInterface) {
     return this.authService.profile(user);
   }

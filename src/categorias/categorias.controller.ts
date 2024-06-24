@@ -15,7 +15,7 @@ import { UpdateCategoriaDto } from "./dto/update-categoria.dto";
 import { Auth } from "../auth/decorators/auth.decorator";
 import { Role } from "../common/enums/role.enum";
 
-@Auth(Role.USER)
+@Auth(Role.ADMIN)
 @Controller("categorias")
 export class CategoriasController {
   constructor(private readonly categoriasService: CategoriasService) {}
