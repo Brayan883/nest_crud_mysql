@@ -16,7 +16,7 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 import { Auth } from "../auth/decorators/auth.decorator";
 import { Role } from "../common/enums/role.enum";
 
-@Auth(Role.ADMIN)
+@Auth(Role.USER)
 @Controller("users")
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
