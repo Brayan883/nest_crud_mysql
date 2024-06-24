@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import { ValidationPipe } from "@nestjs/common";
+import { ImATeapotException, ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,8 +10,8 @@ async function bootstrap() {
   app.enableCors({
     credentials: true,
     origin: function (origin, callback) {
-      if (!whitelist.includes(origin) || !origin) {
-        callback(new Error("Not allowed by CORS"));
+      if (!whitelist.includes(origin) && origin) {
+        return callback(new ImATeapotException("Not allowed by CORS"), false);
       } else {
         callback(null, true);
       }

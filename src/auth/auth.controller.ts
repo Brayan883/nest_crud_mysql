@@ -9,14 +9,10 @@ import { Auth } from "./decorators/auth.decorator";
 import { ActivateUser } from "../common/decorator/activate-user.decorator";
 
 import { UserActivateInterface } from "../common/interfaces/user-activate.interface";
-
-interface RequestWithUser extends Request {
-  user: { email: string; role: string };
-}
-
 @Controller("auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+  @Auth(Role.ADMIN)
   @Post("register")
   register(
     @Body()
