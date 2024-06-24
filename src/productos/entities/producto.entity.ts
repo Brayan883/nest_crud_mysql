@@ -17,7 +17,7 @@ export class Producto {
   @Column()
   nombre: string;
 
-  @Column({ type: "int", precision: 10, scale: 2 })
+  @Column({ type: "int" })
   precio: number;
 
   @Column()
