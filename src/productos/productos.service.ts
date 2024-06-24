@@ -24,8 +24,8 @@ export class ProductosService {
   async create(
     createProductoDto: CreateProductoDto,
     user: UserActivateInterface,
-  ) {
-    const categoria = await this.validateProducto(createProductoDto.nombre);
+  ) {    
+    const categoria = await this.validateProducto(createProductoDto.categoria);
     const newProducto = this.productoRepository.create({
       ...createProductoDto,
       categoria,
@@ -87,7 +87,7 @@ export class ProductosService {
   private async validateProducto(producto: string): Promise<Categoria> {
     const categoria = await this.categoriasRepository.findOneBy({
       nombre: producto,
-    });
+    });    
 
     if (!categoria) {
       throw new HttpException("La categoria no existe", HttpStatus.NOT_FOUND);
