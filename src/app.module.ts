@@ -12,7 +12,7 @@ import { ConfigModule } from "@nestjs/config";
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mysql',
       host: process.env.POSTGRES_HOST,
       port: Number(process.env.POSTGRES_PORT),
       username: process.env.POSTGRES_USERNAME,
