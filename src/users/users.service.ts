@@ -22,7 +22,11 @@ export class UsersService {
   }
 
   async findOneEmail(email: string) {
-    return await this.usersRepository.findOneBy({ email });
+    const user = await this.usersRepository.findOneBy({ email });
+    if (!user) {
+      throw new HttpException("User not found", HttpStatus.NOT_FOUND);
+    }
+    return user;
   }
 
   async findOneEmailPassword(email: string) {
@@ -47,10 +51,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.findOne(id);
     await this.validateEmailUnique(user.email);
-    return await this.usersRepository.update(
-      { id: user.id },
-      updateUserDto,
-    );
+    return await this.usersRepository.update({ id: user.id }, updateUserDto);
   }
 
   async remove(id: number) {
@@ -62,6 +63,6 @@ export class UsersService {
     const user = await this.usersRepository.findOneBy({ email });
     if (user) {
       throw new HttpException("Email already exists", HttpStatus.BAD_REQUEST);
-    }    
+    }
   }
 }
