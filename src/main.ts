@@ -12,7 +12,7 @@ async function bootstrap() {
   app.enableCors({
     credentials: true,
     origin: function (origin, callback) {
-      if (!whitelist.includes(origin) && origin) {
+      if (!whitelist.includes(origin)) {
         return callback(new ImATeapotException("Not allowed by CORS"), false);
       } else {
         callback(null, true);
