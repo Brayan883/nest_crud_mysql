@@ -11,16 +11,16 @@ async function bootstrap() {
 
   const whitelist = [process.env.CORS_URL];
 
-  app.enableCors({
-    credentials: true,
-    origin: function (origin, callback) {
-      if (!whitelist.includes(origin) && origin ) {
-        return callback(new ImATeapotException("Not allowed by CORS"), false);
-      } else {
-        callback(null, true);
-      }
-    },
-  });
+  // app.enableCors({
+  //   credentials: true,
+  //   origin: function (origin, callback) {
+  //     if (!whitelist.includes(origin) && origin ) {
+  //       return callback(new ImATeapotException("Not allowed by CORS"), false);
+  //     } else {
+  //       callback(null, true);
+  //     }
+  //   },
+  // });
 
   app.setGlobalPrefix("api/v1");
 
