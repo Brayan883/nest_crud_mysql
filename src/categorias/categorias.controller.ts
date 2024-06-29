@@ -29,6 +29,7 @@ import {
 @ApiUnauthorizedResponse({
   description: "Unauthorized Bearer Auth",
 })
+@ApiForbiddenResponse({ description: "Forbidden." })
 @ApiTags("Categorias")
 @Auth(Role.ADMIN)
 @Controller("categorias")
@@ -44,8 +45,7 @@ export class CategoriasController {
     return await this.categoriasService.create(createCategoriaDto);
   }
 
-  @ApiOkResponse({ description: "The records have been successfully listed." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
+  @ApiOkResponse({ description: "The records have been successfully listed." })  
   @Get()
   async findAll() {
     return await this.categoriasService.findAll();
@@ -53,7 +53,6 @@ export class CategoriasController {
 
   @ApiOkResponse({ description: "The record has been successfully found." })
   @ApiNotFoundResponse({ description: "The record was not found." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
   @Get(":id")
   async findOne(@Param("id", ParseIntPipe) id: number) {
     return await this.categoriasService.findOne(id);
@@ -61,7 +60,6 @@ export class CategoriasController {
 
   @ApiOkResponse({ description: "The record has been successfully updated." })
   @ApiNotFoundResponse({ description: "The record was not found." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
   @Patch(":id")
   async update(
     @Param("id", ParseIntPipe) id: number,
@@ -72,7 +70,6 @@ export class CategoriasController {
 
   @ApiOkResponse({ description: "The record has been successfully removed." })
   @ApiNotFoundResponse({ description: "The record was not found." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
   @Delete(":id")
   async remove(@Param("id", ParseIntPipe) id: number) {
     return await this.categoriasService.remove(id);

@@ -6,11 +6,12 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Producto } from "./entities/producto.entity";
 import { CategoriasModule } from "src/categorias/categorias.module";
 import { CategoriasService } from "src/categorias/categorias.service";
-import { AuthModule } from "../auth/auth.module";
+import { JwtService } from "@nestjs/jwt";
+// import { AuthModule } from "../auth/auth.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Producto]), CategoriasModule, AuthModule],
+  imports: [TypeOrmModule.forFeature([Producto]), CategoriasModule],
   controllers: [ProductosController],
-  providers: [ProductosService, CategoriasService],
+  providers: [ProductosService, CategoriasService, JwtService],
 })
 export class ProductosModule {}

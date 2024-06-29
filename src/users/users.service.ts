@@ -22,10 +22,7 @@ export class UsersService {
   }
 
   async findOneEmail(email: string) {
-    const user = await this.usersRepository.findOneBy({ email });
-    if (!user) {
-      throw new HttpException("User not found", HttpStatus.NOT_FOUND);
-    }
+    const user = await this.usersRepository.findOneBy({ email });    
     return user;
   }
 

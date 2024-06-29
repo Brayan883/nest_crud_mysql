@@ -38,8 +38,9 @@ import {
 export class ProductosController {
   constructor(private readonly productosService: ProductosService) {}
 
-  @ApiForbiddenResponse({ description: "Forbidden." })
+  
   @ApiOkResponse({ description: "The record has been successfully created." })
+  @ApiNotFoundResponse({ description: "The category was not found." })  
   @Post()
   async create(
     @Body() createProductoDto: CreateProductoDto,
@@ -47,8 +48,7 @@ export class ProductosController {
   ) {
     return await this.productosService.create(createProductoDto, user);
   }
-
-  @ApiForbiddenResponse({ description: "Forbidden." })
+  
   @ApiOkResponse({ description: "The record has been successfully listed." })
   @Get()
   async findAll(@ActivateUser() user: UserActivateInterface) {
@@ -56,7 +56,6 @@ export class ProductosController {
   }
 
   @ApiNotFoundResponse({ description: "The record was not found." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
   @Get(":id")
   async findOne(
     @Param("id", ParseIntPipe) id: number,
@@ -65,8 +64,7 @@ export class ProductosController {
     return await this.productosService.findOne(id, user);
   }
 
-  @ApiNotFoundResponse({ description: "The record was not found." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
+  @ApiNotFoundResponse({ description: "The record was not found." })  
   @ApiOkResponse({ description: "The record has been successfully updated." })
   @Patch(":id")
   async update(
@@ -78,7 +76,6 @@ export class ProductosController {
   }
 
   @ApiNotFoundResponse({ description: "The record was not found." })
-  @ApiForbiddenResponse({ description: "Forbidden." })
   @ApiOkResponse({ description: "The record has been successfully removed." })
   @Delete(":id")
   async remove(

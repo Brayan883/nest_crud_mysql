@@ -4,6 +4,8 @@ import { ImATeapotException, ValidationPipe } from "@nestjs/common";
 
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
+import * as cookieParser from 'cookie-parser';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
@@ -12,7 +14,7 @@ async function bootstrap() {
   app.enableCors({
     credentials: true,
     origin: function (origin, callback) {
-      if (!whitelist.includes(origin)) {
+      if (!whitelist.includes(origin) && origin ) {
         return callback(new ImATeapotException("Not allowed by CORS"), false);
       } else {
         callback(null, true);
@@ -21,6 +23,8 @@ async function bootstrap() {
   });
 
   app.setGlobalPrefix("api/v1");
+
+  app.use(cookieParser());
 
   app.useGlobalPipes(
     new ValidationPipe({
